@@ -4,7 +4,11 @@
 describe("Test Contact Us form via Automation Test Store", () => {
   it("Should be able to submit a successful submission via contact us form", () => {
     cy.visit("https://www.automationteststore.com/");
-    cy.get("a[href$='contact']").click();
+    cy.get("a[href$='contact']")
+      .click()
+      .then((linkText) => {
+        cy.log("Clicked on link using text: " + linkText.text());
+      });
     cy.get("#ContactUsFrm_first_name").type("Jane");
     cy.get("#ContactUsFrm_email").type("jane_doe@email.com");
     cy.get("#ContactUsFrm_email").should("have.attr", "name", "email");
