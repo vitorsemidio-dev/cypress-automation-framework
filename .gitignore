@@ -131,4 +131,3 @@ dist
 
 # Cypress
 cypress/videos/*
-!cypress/videos/.gitkeep

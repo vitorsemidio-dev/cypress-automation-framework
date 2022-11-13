@@ -8,6 +8,7 @@
     "node": ">=16.0.0 <17.0.0"
   },
   "scripts": {
+    "cy:chrome": "cypress run --browser chrome",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1"
