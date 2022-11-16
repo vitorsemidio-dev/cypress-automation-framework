@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("navigateTo_WebdriverUni_HomePage", () => {
+  cy.visit(Cypress.env("webdriveruni_homepage"));
+})
+
+Cypress.Commands.add("navigateTo_WebdriverUni_ContactUsPage", () => {
+  cy.visit(Cypress.env("webdriveruni_homepage") + "/Contact-Us/contactus.html");
+})
