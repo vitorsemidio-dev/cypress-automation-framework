@@ -1,8 +1,18 @@
+import Homepage_PO from "../../support/pageObjects/webdriver-uni/Homepage_PO";
+import ContactUs_PO from "../../support/pageObjects/webdriver-uni/ContactUs_PO";
+
 /// <reference types="cypress" />
 
 describe("Test Contact Us form via WebdriverUni", () => {
+  const homepage_PO = new Homepage_PO();
+  const contactUs_PO = new ContactUs_PO();
+
+  beforeEach(() => {
+    homepage_PO.visitHomepage();
+    homepage_PO.clickOn_ContactUs_Button();
+  });
+
   it("Should be able to submit a successful submission via contact us form", () => {
-    cy.visit("/Contact-Us/contactus.html");
     cy.document().should("have.property", "charset").and("eq", "UTF-8");
     cy.title().should("include", "WebDriver | Contact Us");
     cy.url().should("include", "contactus");
@@ -14,8 +24,19 @@ describe("Test Contact Us form via WebdriverUni", () => {
     cy.get("h1").should("have.text", "Thank You for your Message!");
   });
 
+  it("[WITH PO] Should be able to submit a successful submission via contact us form", () => {
+    cy.document().should("have.property", "charset").and("eq", "UTF-8");
+    cy.title().should("include", "WebDriver | Contact Us");
+    contactUs_PO.contactUs_Submition(
+      "Jane",
+      "Doe",
+      "jane_doe@email.com",
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    );
+    contactUs_PO.assert_Submition("h1", "Thank You for your Message!");
+  });
+
   it("Should no be able to submit a successful submission via contact us form as all fields are required", () => {
-    cy.visit("/Contact-Us/contactus.html");
     cy.get('[name="first_name"]').type("Jane");
     cy.get('[name="last_name"]').type("Doe");
     cy.get("textarea.feedback-input").type("Lorem ipsum dolor sit amet consectetur, adipisicing elit.");
@@ -24,8 +45,13 @@ describe("Test Contact Us form via WebdriverUni", () => {
     cy.get("body").contains("Error: Invalid email address");
   });
 
+  it("[WITH PO] Should no be able to submit a successful submission via contact us form as all fields are required", () => {
+    contactUs_PO.contactUs_Submition("Jane", "Doe", "", "Lorem ipsum dolor sit amet consectetur, adipisicing elit.");
+    contactUs_PO.assert_Submition("body", "Error: all fields are required");
+    contactUs_PO.assert_Submition("body", "Error: Invalid email address");
+  });
+
   it("Should be able to submit a successful submission via contact us form using 'Cypress.env'", () => {
-    cy.visit("/Contact-Us/contactus.html");
     cy.document().should("have.property", "charset").and("eq", "UTF-8");
     cy.title().should("include", "WebDriver | Contact Us");
     cy.url().should("include", "contactus");
