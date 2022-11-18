@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-describe("Verifying variables, cypress commands and jquery commands", () => {
+describe.skip("Verifying variables, cypress commands and jquery commands", () => {
   // * Recommended Approach
   it("Navegating to specific product page", () => {
     cy.visit("https://www.automationteststore.com/");

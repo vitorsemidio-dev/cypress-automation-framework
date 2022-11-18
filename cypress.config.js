@@ -12,6 +12,9 @@ module.exports = defineConfig({
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10_000,
     pageLoadTimeout: 120_000,
+    screenshotOnRunFailure: true,
+    trashAssetsBeforeRuns: true,
+    video: true,
   },
   env: {
     first_name: "Sarah",

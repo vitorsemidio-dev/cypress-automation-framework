@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-describe("Iterate over elements", () => {
+describe.skip("Iterate over elements", () => {
   it("Log information all hair care products", () => {
     cy.visit("https://www.automationteststore.com/");
     cy.get("a[href*='product/category&path=']").contains("Hair Care").click();
