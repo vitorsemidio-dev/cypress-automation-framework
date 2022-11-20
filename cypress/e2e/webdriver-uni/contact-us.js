@@ -10,7 +10,7 @@ describe("Test Contact Us form via WebdriverUni", () => {
   before(() => {
     cy.fixture("contact-us.json").then(function (data) {
       // this.data = data;
-      globalThis = data;
+      globalThis.data = data;
     });
   });
 
@@ -19,17 +19,31 @@ describe("Test Contact Us form via WebdriverUni", () => {
     homepage_PO.clickOn_ContactUs_Button();
   });
 
-  it("Should be able to submit a successful submission via contact us form", () => {
+  it("Should assert heat attributes", () => {
     cy.document().should("have.property", "charset").and("eq", "UTF-8");
     cy.title().should("include", "WebDriver | Contact Us");
     cy.url().should("include", "contactus");
-    const contactUsJSON = globalThis;
+  });
+
+  it("Should be able to submit a successful submission via contact us form", () => {
+    const contactUsJSON = globalThis.data;
     cy.get('[name="first_name"]').type(contactUsJSON.firstName);
     cy.get('[name="last_name"]').type(contactUsJSON.lastName);
     cy.get('[name="email"]').type(contactUsJSON.email);
     cy.get("textarea.feedback-input").type(contactUsJSON.comment);
     cy.get('[type="submit"]').click();
     cy.get("h1").should("have.text", "Thank You for your Message!");
+  });
+
+  it.only("[WITH CC] Should be able to submit a successful submission via contact us form", () => {
+    const contactUsJSON = globalThis.data;
+    cy.webdriverUni_ContactForm_Submission(
+      contactUsJSON.firstName,
+      contactUsJSON.lastName,
+      contactUsJSON.email,
+      contactUsJSON.comment,
+    );
+    cy.webdriverUni_Assert_Submission("h1", "Thank You for your Message!")
   });
 
   it("[WITH PO] Should be able to submit a successful submission via contact us form", () => {
@@ -71,7 +85,7 @@ describe("Test Contact Us form via WebdriverUni", () => {
     cy.get("h1").should("have.text", "Thank You for your Message!");
   });
 
-  it("Should  fail and take screenshot", () => {
+  it.skip("Should fail and take screenshot", () => {
     cy.document().should("have.property", "charset").and("eq", "UTF-8");
     cy.title().should("include", "WebDriver | Contact Us");
     cy.url().should("include", "contactus");
@@ -145,7 +159,7 @@ describe("Test Contact Us form via WebdriverUni with specific viewport size", ()
     cy.get("h1").should("have.text", "Thank You for your Message!");
   });
 
-  it("Should fail and take screenshot", () => {
+  it.skip("Should fail and take screenshot", () => {
     cy.viewport("iphone-xr");
     cy.document().should("have.property", "charset").and("eq", "UTF-8");
     cy.title().should("include", "WebDriver | Contact Us");

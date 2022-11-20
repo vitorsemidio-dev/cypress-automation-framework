@@ -26,8 +26,26 @@
 
 Cypress.Commands.add("navigateTo_WebdriverUni_HomePage", () => {
   cy.visit(Cypress.env("webdriveruni_homepage"));
-})
+});
 
 Cypress.Commands.add("navigateTo_WebdriverUni_ContactUsPage", () => {
   cy.visit(Cypress.env("webdriveruni_homepage") + "/Contact-Us/contactus.html");
-})
+});
+
+Cypress.Commands.add("selectProduct", (producttName) => {
+  cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
+    if ($el.text().includes(producttName)) {
+      cy.wrap($el).click();
+    }
+  });
+});
+Cypress.Commands.add("webdriverUni_ContactForm_Submission", (firstName, lastName, email, comment) => {
+  cy.get('[name="first_name"]').type(firstName);
+  cy.get('[name="last_name"]').type(lastName);
+  cy.get('[name="email"]').type(email);
+  cy.get("textarea.feedback-input").type(comment);
+  cy.get('[type="submit"]').click();
+});
+Cypress.Commands.add("webdriverUni_Assert_Submission", ($selector, text) => {
+  cy.get($selector).should("contain", text);
+});
