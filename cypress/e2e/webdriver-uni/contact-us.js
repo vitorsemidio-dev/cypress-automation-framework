@@ -76,7 +76,7 @@ describe("Test Contact Us form via WebdriverUni", () => {
   });
 });
 
-describe.only("Test Contact Us form via WebdriverUni with specific viewport size", () => {
+describe("Test Contact Us form via WebdriverUni with specific viewport size", () => {
   const homepage_PO = new Homepage_PO();
   const contactUs_PO = new ContactUs_PO();
   

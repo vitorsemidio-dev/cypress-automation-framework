@@ -19,7 +19,7 @@ describe("Test mouse actions", () => {
     cy.get("#double-click").should("have.css", "background-color", expectColorDbClick);
   });
 
-  it.only("I should be able hold down the left mouse click button on a given element", () => {
+  it("I should be able hold down the left mouse click button on a given element", () => {
     const expectColor = "rgb(254, 196, 45)";
     cy.get("#double-click").should("have.css", "background-color", expectColor);
     cy.get("#double-click").dblclick();

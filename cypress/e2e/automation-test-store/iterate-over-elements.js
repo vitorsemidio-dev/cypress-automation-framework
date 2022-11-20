@@ -1,9 +1,11 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-describe.skip("Iterate over elements", () => {
-  it("Log information all hair care products", () => {
+describe("Iterate over elements", () => {
+  beforeEach(() => {
     cy.visit("https://www.automationteststore.com/");
+  });
+  it("Log information all hair care products", () => {
     cy.get("a[href*='product/category&path=']").contains("Hair Care").click();
     cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
       cy.log(`Index: ${index} ${$el.text()}`);
@@ -11,7 +13,6 @@ describe.skip("Iterate over elements", () => {
   });
 
   it("Add specific produt to basket", () => {
-    cy.visit("https://www.automationteststore.com/");
     cy.get("a[href*='product/category&path=']").contains("Hair Care").click();
 
     cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
