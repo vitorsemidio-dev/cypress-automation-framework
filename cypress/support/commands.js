@@ -39,6 +39,7 @@ Cypress.Commands.add("selectProduct", (producttName) => {
     }
   });
 });
+
 Cypress.Commands.add("webdriverUni_ContactForm_Submission", (firstName, lastName, email, comment) => {
   cy.get('[name="first_name"]').type(firstName);
   cy.get('[name="last_name"]').type(lastName);
@@ -46,6 +47,16 @@ Cypress.Commands.add("webdriverUni_ContactForm_Submission", (firstName, lastName
   cy.get("textarea.feedback-input").type(comment);
   cy.get('[type="submit"]').click();
 });
+
 Cypress.Commands.add("webdriverUni_Assert_Submission", ($selector, text) => {
   cy.get($selector).should("contain", text);
+});
+
+Cypress.Commands.add("addProductToBasket", (productName) => {
+  cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
+    if ($el.text() === productName) {
+      cy.get(".productcart").invoke("removeAttr", "href").eq(index).click();
+      cy.get(".jumbotron").eq(index).should("have.class", "added_to_cart")
+    }
+  });
 });
