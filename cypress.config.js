@@ -10,6 +10,7 @@ module.exports = defineConfig({
     baseUrl: "http://www.webdriveruniversity.com",
     chromeWebSecurity: false,
     experimentalSessionAndOrigin: true,
+    experimentalRunAllSpecs: true,
     defaultCommandTimeout: 10_000,
     pageLoadTimeout: 120_000,
     screenshotOnRunFailure: true,
@@ -22,5 +23,5 @@ module.exports = defineConfig({
     first_name: "Sarah",
     webdriveruni_homepage: "http://www.webdriveruniversity.com",
     automationteststore_homepage: "https://www.automationteststore.com/",
-  }
+  },
 });
