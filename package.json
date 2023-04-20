@@ -10,15 +10,21 @@
     "cy:chrome": "cypress run --headed --browser chrome",
     "cy:env": "cypress run --headed --browser chrome --spec cypress/e2e/webdriver-uni/contact-us.js --env first_name=Bill",
     "cy:open": "cypress open",
+    "precy:run": "npm run junit-delete-results",
+    "postcy:run": "npm run junit-merge",
     "cy:run": "cypress run",
     "cy:record": "npx cypress run --record --key f2c182cf-7fe7-45de-911f-503cb0295421",
-    "cy:ci": "npx cypress run --record --key f2c182cf-7fe7-45de-911f-503cb0295421"
+    "cy:ci": "npx cypress run --record --key f2c182cf-7fe7-45de-911f-503cb0295421",
+    "junit-merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/results.xml -C",
+    "junit-delete-results": "rm -rf cypress/results/* || true"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^12.10.0",
-    "cypress-xpath": "^2.0.1"
+    "cypress-multi-reporters": "^1.6.3",
+    "cypress-xpath": "^2.0.1",
+    "mocha-junit-reporter": "^2.2.0"
   }
 }
